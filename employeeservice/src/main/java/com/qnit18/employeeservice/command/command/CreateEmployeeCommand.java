@@ -1,9 +1,6 @@
 package com.qnit18.employeeservice.command.command;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
@@ -11,7 +8,7 @@ import org.axonframework.modelling.command.TargetAggregateIdentifier;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class EmployeeCreateCommand {
+public class CreateEmployeeCommand {
 
     @TargetAggregateIdentifier
     String id;

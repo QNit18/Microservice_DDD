@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class EmployeeRequestModel {
+public class CreateEmployeeModel {
 
     @Size(min = 2, max = 30, message = "First name can be only from 2 to 30 characters")
     @NotBlank(message = "You must enter your first name")
@@ -22,6 +22,7 @@ public class EmployeeRequestModel {
     @NotBlank(message = "You must enter your last name")
     String lastName;
 
+    @NotBlank(message = "You must enter your Kin")
     String Kin;
 
 }

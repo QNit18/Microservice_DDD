@@ -7,9 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="bookservice" />
+        <module name="employeeservice" />
         <module name="discoveryserver" />
         <module name="commonservice" />
+        <module name="bookservice" />
       </profile>
     </annotationProcessing>
   </component>
@@ -18,6 +19,7 @@
       <module name="bookservice" options="-parameters" />
       <module name="commonservice" options="-parameters" />
       <module name="discoveryserver" options="-parameters" />
+      <module name="employeeservice" options="-parameters" />
     </option>
   </component>
 </project>

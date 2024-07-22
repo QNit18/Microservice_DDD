@@ -1,6 +1,7 @@
 package com.qnit18.employeeservice.command.model;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,8 @@ public class UpdateEmployeeModel {
 
     @NotBlank(message = "You must enter your Kin")
     String Kin;
-    
-    String isDisciplined;
+
+    @NotNull(message = "isDisciplined is mandatory")
+    Boolean isDisciplined;
 
 }
