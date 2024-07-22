@@ -1,4 +1,4 @@
-package com.qnit18.bookservice.command.model;
+package com.qnit18.bookservice.command.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,10 +9,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookRequestModel {
-    private String bookId;
+public class BookUpdatedEvent {
+
+    private String id;
 
     private String name;
+
     private String author;
+
     private Boolean isReady;
 }
