@@ -1,7 +1,9 @@
 package com.qnit18.employeeservice.command.aggerate;
 import com.qnit18.employeeservice.command.command.CreateEmployeeCommand;
+import com.qnit18.employeeservice.command.command.DeleteEmployeeCommand;
 import com.qnit18.employeeservice.command.command.UpdateEmployeeCommand;
 import com.qnit18.employeeservice.command.event.EmployeeCreatedEvent;
+import com.qnit18.employeeservice.command.event.EmployeeDeletedEvent;
 import com.qnit18.employeeservice.command.event.EmployeeUpdatedEvent;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -56,5 +58,17 @@ public class EmployeeAggregate {
         this.lastName = event.getLastName();
         this.Kin = event.getKin();
         this.isDisciplined = event.getIsDisciplined();
+    }
+
+    @CommandHandler
+    public void handle(DeleteEmployeeCommand command) {
+        EmployeeDeletedEvent event = new EmployeeDeletedEvent();
+        BeanUtils.copyProperties(command, event);
+        AggregateLifecycle.apply(event);
+    }
+
+    @EventSourcingHandler
+    public void on(EmployeeDeletedEvent event){
+        this.id = event.getId();
     }
 }

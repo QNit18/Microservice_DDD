@@ -35,4 +35,9 @@ public class EmployeeEventsHandler {
             employeeRepository.save(employee1);
         });
     }
+
+    @EventHandler
+    public void on(EmployeeDeletedEvent event){
+        employeeRepository.deleteById(event.getId());
+    }
 }

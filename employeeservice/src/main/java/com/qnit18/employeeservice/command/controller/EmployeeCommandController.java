@@ -1,6 +1,7 @@
 package com.qnit18.employeeservice.command.controller;
 
 import com.qnit18.employeeservice.command.command.CreateEmployeeCommand;
+import com.qnit18.employeeservice.command.command.DeleteEmployeeCommand;
 import com.qnit18.employeeservice.command.command.UpdateEmployeeCommand;
 import com.qnit18.employeeservice.command.model.CreateEmployeeModel;
 import com.qnit18.employeeservice.command.model.UpdateEmployeeModel;
@@ -30,7 +31,12 @@ public class EmployeeCommandController {
     public String updateEmployee(@RequestBody @Valid UpdateEmployeeModel employeeModel, @PathVariable String employeeId){
         UpdateEmployeeCommand command = new UpdateEmployeeCommand(employeeId, employeeModel.getFirstName(),
                 employeeModel.getLastName(), employeeModel.getKin(), employeeModel.getIsDisciplined());
+        return commandGateway.sendAndWait(command);
+    }
 
+    @DeleteMapping("/{employeeId}")
+    public String deleteEmployee(@PathVariable String employeeId){
+        DeleteEmployeeCommand command = new DeleteEmployeeCommand(employeeId);
         return commandGateway.sendAndWait(command);
     }
 }
