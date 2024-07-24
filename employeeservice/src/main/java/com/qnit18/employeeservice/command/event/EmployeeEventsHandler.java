@@ -3,6 +3,8 @@ package com.qnit18.employeeservice.command.event;
 import com.qnit18.employeeservice.command.data.Employee;
 import com.qnit18.employeeservice.command.repository.EmployeeRepository;
 import org.axonframework.eventhandling.EventHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,6 +14,7 @@ import java.util.Optional;
 @Component
 public class EmployeeEventsHandler {
 
+    private static final Logger log = LoggerFactory.getLogger(EmployeeEventsHandler.class);
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -39,5 +42,11 @@ public class EmployeeEventsHandler {
     @EventHandler
     public void on(EmployeeDeletedEvent event){
         employeeRepository.deleteById(event.getId());
+        try {
+            employeeRepository.findById(event.getId()).orElseThrow(() -> new Exception("Not found employee with id"));
+            employeeRepository.deleteById(event.getId());
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
     }
 }
