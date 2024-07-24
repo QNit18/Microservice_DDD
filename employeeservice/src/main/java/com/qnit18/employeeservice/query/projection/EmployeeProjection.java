@@ -21,7 +21,7 @@ public class EmployeeProjection {
 
     @QueryHandler
     public List<EmployeeResponseModel> handle(GetAllEmployeeQuery query){
-        List<Employee> employees = employeeRepository.findAll();
+        List<Employee> employees = employeeRepository.findAllByIsDisciplined(query.getIsDisciplined());
 
         List<EmployeeResponseModel> employeeResponseModels = new ArrayList<>();
 

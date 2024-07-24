@@ -27,16 +27,21 @@ public class EmployeeEventsHandler {
 
     @EventHandler
     public void on(EmployeeUpdatedEvent event){
-        Optional<Employee> employee = employeeRepository.findById(event.getId());
-        System.out.println("Employee: " + employee);
-        employee.ifPresent(employee1 -> {
-            employee1.setFirstName(event.getFirstName());
-            employee1.setLastName(event.getLastName());
-            employee1.setKin(event.getKin());
-            employee1.setIsDisciplined(event.getIsDisciplined());
-            System.out.println("Employee1: " + employee1);
-            employeeRepository.save(employee1);
-        });
+        try{
+            Optional<Employee> employee = Optional.ofNullable(employeeRepository.findById(event.getId()).orElseThrow(() -> new Exception("Not found employee with id")));
+            System.out.println("Employee: " + employee);
+            employee.ifPresent(employee1 -> {
+                employee1.setFirstName(event.getFirstName());
+                employee1.setLastName(event.getLastName());
+                employee1.setKin(event.getKin());
+                employee1.setIsDisciplined(event.getIsDisciplined());
+                System.out.println("Employee1: " + employee1);
+                employeeRepository.save(employee1);
+            });
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @EventHandler
