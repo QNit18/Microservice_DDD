@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +22,7 @@ import java.util.List;
 //@Hidden
 public class EmployeeQueryController {
 
+    private static final Logger log = LoggerFactory.getLogger(EmployeeQueryController.class);
     @Autowired
     private QueryGateway queryGateway;
 
@@ -40,6 +43,7 @@ public class EmployeeQueryController {
     @GetMapping
     public List<EmployeeResponseModel> getAllEmployees(@RequestParam(required = false, defaultValue = "false") Boolean isDisciplined){
         GetAllEmployeeQuery query = new GetAllEmployeeQuery(isDisciplined);
+        log.info("Call s1");
         return queryGateway.query(query, ResponseTypes.multipleInstancesOf(EmployeeResponseModel.class)).join();
     }
 
